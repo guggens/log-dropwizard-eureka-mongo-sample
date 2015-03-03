@@ -1,0 +1,9 @@
+server:
+    type: simple
+    applicationContextPath: /eureka
+    adminContextPath: /admin
+    connector:
+        type: http
+        port: 20000
+
+defaultServiceUrl: http://127.0.0.1:20000/eureka/v2/
