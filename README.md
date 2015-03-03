@@ -5,19 +5,19 @@ this is the almight dropwizard eureka mongo example.
 
 ##How to set it up:
 
-# Install MongoDB to some place where you feel apropriate.
-# Start MongoDB by open a console in subfolder mongo
+### Install MongoDB to some place where you feel apropriate.
+### Start MongoDB by open a console in subfolder mongo
  * call: pathtomongo\bin\mongod -f mongolog.conf
  * check mongo\mongo.log if mongo is up properly.
  * leave console window open until you want to shutdown mongo.
 
-# fire up log eureka server
+### fire up log eureka server
  * go into log-eureka-server with a terminal 
  * run mvn clean package
  * fire up server by calling: java -jar target\log-eureka-server-0.0.1.jar server src/main/resources/log-eureka-server.yml
  * check if it is running: call http://localhost:20000/eureka/v2/apps (you can change port in the yml file if needed).
 
-# fire up log writer to mongodb
+### fire up log writer to mongodb
  * go into log-writer with another terminal
  * run mvn clean package
  * fire up server by calling: java -jar target\log-writer-0.0.1.jar server src/main/resources/log-writer.yml
@@ -31,7 +31,7 @@ this is the almight dropwizard eureka mongo example.
  * check http://localhost:20010/log?name=samplelogentry should give you a simple result and write a log entry.
  * check http://localhost:20010/log/list again, you now should have a log entry.
 
-# fire up log producer
+### fire up log producer
  * go into log-producer with a terminal
  * run mvn clean package
  * fire up server by calling: java -jar target\log-producer-0.0.1.jar server src/main/resources/log-producer.yml
