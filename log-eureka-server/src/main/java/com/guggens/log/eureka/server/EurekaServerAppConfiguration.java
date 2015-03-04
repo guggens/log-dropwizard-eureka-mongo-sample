@@ -8,9 +8,6 @@ import io.dropwizard.Configuration;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-/**
- * Created by GOEBELS on 03.03.2015.
- */
 public class EurekaServerAppConfiguration extends Configuration implements ConfiguresEurekaServer {
 
     @Valid
