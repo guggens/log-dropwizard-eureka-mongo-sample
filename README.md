@@ -1,11 +1,18 @@
 # log-dropwizard-eureka-mongo-sample
-Sample combining some dropwizard standalone apps: a eureka server, a resource writing to a mongo db and a log producer who discovers the writer and calls it resource.
+Sample combining some dropwizard standalone apps: a eureka server, a resource writing to a mongo db and a log producer who discovers the writer and calls its resource.
 
-this is the almight dropwizard eureka mongo example.
+This is the almight dropwizard eureka mongo example.
+
+##Preconditions:
+ * Java installed properly, 1.6 and above
+ * Maven installed properly, 3.0.5 and above
+ * MongoDB installed properly, any recent version should do
+ * I've only tried it on windows, if you try anything else, please let me know.
+ * Ports: the following ports are used: 20000, 20001, 20010, 20011, 20012, 20013, 20020, 20021, 20030, 20031, 20040, 20041
+ 	If you've some port conflict, search in the .yml files and change numbers, that should do the trick.
 
 ##How to set it up:
 
-### Install MongoDB to some place where you feel apropriate.
 ### Start MongoDB by open a console in subfolder mongo
  * call: pathtomongo\bin\mongod -f mongolog.conf
  * check mongo\mongo.log if mongo is up properly.
@@ -14,13 +21,13 @@ this is the almight dropwizard eureka mongo example.
 ### fire up log eureka server
  * go into log-eureka-server with a terminal 
  * run mvn clean package
- * fire up server by calling: java -jar target\log-eureka-server-0.0.1.jar server src/main/resources/log-eureka-server.yml
- * check if it is running: call http://localhost:20000/eureka/v2/apps (you can change port in the yml file if needed).
+ * fire up server by calling: log-eureka-server.bat
+ * check if it is running: call (http://localhost:20000/eureka/v2/apps)
 
 ### fire up log writer to mongodb
  * go into log-writer with another terminal
  * run mvn clean package
- * fire up server by calling: java -jar target\log-writer-0.0.1.jar server src/main/resources/log-writer.yml
+ * fire up server by calling: log-writer.bat
  * checks:
  * try out the dropwizard help check. should be fine for all parts: http://localhost:20011/healthcheck
 	{"deadlocks":{"healthy":true},"eureka":{"healthy":true},"logwriter":{"healthy":true},"mongo":{"healthy":true}}
@@ -42,3 +49,4 @@ this is the almight dropwizard eureka mongo example.
  * [dropwizard] (http://dropwizard.io/) obviously...
  * [mongodb](https://github.com/eeb/dropwizard-mongo) for mongodb access
  * [eureka client&server](https://github.com/jlewallen/dropwizard-discovery) eureka client and server implemetation
+ * [tenacity & breakerbox] as a quick hystrix and dashbord integration - but maybe I will remove them and integrate archaius and hystrix directly.
