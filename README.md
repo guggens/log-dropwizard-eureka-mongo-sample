@@ -22,7 +22,8 @@ This is the almight dropwizard eureka mongo example.
  * go into log-eureka-server with a terminal 
  * run mvn clean package
  * fire up server by calling: log-eureka-server.bat
- * check if it is running: call (http://localhost:20000/eureka/v2/apps)
+ * check if it is running: call http://localhost:20000/eureka/v2/apps(http://localhost:20000/eureka/v2/apps)
+ * should give you a nearly empty apps xml document
 
 ### fire up log writer to mongodb
  * go into log-writer with another terminal
@@ -31,8 +32,7 @@ This is the almight dropwizard eureka mongo example.
  * checks:
  * try out the dropwizard help check. should be fine for all parts: http://localhost:20011/healthcheck
 	{"deadlocks":{"healthy":true},"eureka":{"healthy":true},"logwriter":{"healthy":true},"mongo":{"healthy":true}}
-	
- * mark the service as up by making a POST on http://localhost:20011/tasks/up , f.e. with restclient firefox plugin or curl.
+ * wait for the service to get registered in eureka, this happens after ~30 seconds (configurable)
  * check http://localhost:20000/eureka/v2/apps , it should have the logwriter listed as installed app.
  * check http://localhost:20010/log/list should give you an empty list.
  * check http://localhost:20010/log?name=samplelogentry should give you a simple result and write a log entry.
@@ -49,4 +49,4 @@ This is the almight dropwizard eureka mongo example.
  * [dropwizard] (http://dropwizard.io/) obviously...
  * [mongodb](https://github.com/eeb/dropwizard-mongo) for mongodb access
  * [eureka client&server](https://github.com/jlewallen/dropwizard-discovery) eureka client and server implemetation
- * [tenacity & breakerbox] as a quick hystrix and dashbord integration - but maybe I will remove them and integrate archaius and hystrix directly.
+ * [tenacity] (https://github.com/yammer/tenacity) & [breakerbox] (https://github.com/yammer/breakerbox) as a quick hystrix and dashbord integration - but maybe I will remove them and integrate archaius and hystrix directly.
