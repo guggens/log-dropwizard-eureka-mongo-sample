@@ -1,0 +1,1 @@
+java -jar target\log-writer-0.0.1.jar server src\main\resources\log-writer.yml

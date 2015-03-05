@@ -1,0 +1,1 @@
+java -jar target\log-producer-tenacity-0.0.1.jar server src\main\resources\log-producer-tenacity.yml

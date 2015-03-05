@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="1" author="chrisgray">
+        <createTable tableName="dependency">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(1024)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="timestamp" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tenacity_configuration" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="varchar(1024)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="service" type="varchar(1024)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createIndex tableName="dependency" indexName="name_timestamp_index" unique="true">
+            <column name="name"/>
+            <column name="timestamp"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

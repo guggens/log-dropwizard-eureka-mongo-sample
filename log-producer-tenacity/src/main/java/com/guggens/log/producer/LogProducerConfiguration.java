@@ -37,6 +37,16 @@ public class LogProducerConfiguration extends Configuration implements Configure
     @Valid
     @NotNull
     @JsonProperty
+    private String logsWrittenPerMinute;
+
+    @Valid
+    @NotNull
+    @JsonProperty
+    private String logsWrittenWaitBetweenCommandsInMilliseconds;
+
+    @Valid
+    @NotNull
+    @JsonProperty
     private String logWriterApplicationName;
 
     @NotNull
@@ -76,5 +86,21 @@ public class LogProducerConfiguration extends Configuration implements Configure
 
     public String getLogWriterApplicationName() {
         return logWriterApplicationName;
+    }
+
+    public String getLogsWrittenPerMinute() {
+        return logsWrittenPerMinute;
+    }
+
+    public void setLogsWrittenPerMinute(String logsWrittenPerMinute) {
+        this.logsWrittenPerMinute = logsWrittenPerMinute;
+    }
+
+    public String getLogsWrittenWaitBetweenCommandsInMilliseconds() {
+        return logsWrittenWaitBetweenCommandsInMilliseconds;
+    }
+
+    public void setLogsWrittenWaitBetweenCommandsInMilliseconds(String logsWrittenWaitBetweenCommandsInMilliseconds) {
+        this.logsWrittenWaitBetweenCommandsInMilliseconds = logsWrittenWaitBetweenCommandsInMilliseconds;
     }
 }

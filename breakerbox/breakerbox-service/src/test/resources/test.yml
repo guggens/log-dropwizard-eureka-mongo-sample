@@ -1,0 +1,40 @@
+breakerbox:
+  urls: file:///config.properties,http://localhost:20040/archaius/breakerbox
+  initialDelay: 10s
+  delay: 60s
+
+azure:
+  accountName: fake
+  accountKey: fake
+  connectionTimeout: 500ms
+  retryInterval: 1s
+  retryAttempts: 1
+
+tenacityClient:
+  connectionTimeout: 50ms
+
+ldap:
+  uri: ldaps://fakeldap.com:636
+  cachePolicy: maximumSize=10000, expireAfterWrite=10m
+  userFilter: ou=people,dc=yammer,dc=com
+  groupFilter: ou=groups,dc=yourcompany,dc=com
+  userNameAttribute: cn
+  groupNameAttribute: cn
+  groupMembershipAttribute: memberUid
+  connectTimeout: 500ms
+  readTimeout: 500ms
+
+server:
+  applicationConnectors:
+    - type: http
+      port: 8080
+  adminConnectors:
+    - type: http
+      port: 8081
+  gzip:
+    enabled: false
+
+logging:
+  level: INFO
+  appenders:
+    - type: console

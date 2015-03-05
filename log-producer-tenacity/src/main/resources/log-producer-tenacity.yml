@@ -4,9 +4,11 @@
 
 
 name: logproducer
-port: 20020
+port: 20030
 vipAddress: localhost
 defaultServiceUrl: http://127.0.0.1:20000/eureka/v2/
+logsWrittenPerMinute: 2000
+logsWrittenWaitBetweenCommandsInMilliseconds: 3
 logWriterApplicationName: logwriter
 
 # use the simple server factory if you only want to run on a single port
@@ -44,17 +46,17 @@ server:
 
 
 breakerboxConfiguration:
-  urls: http://localhost:20040/archaius/integration-example
+  urls: http://localhost:20040/archaius/logwriter
   initialDelay: 5s
   delay: 2s
 
 logWriterTenacityConfiguration:
   executionIsolationThreadTimeoutInMillis: 1000
   threadpool:
-    threadPoolCoreSize: 10
+    threadPoolCoreSize: 100
     keepAliveTimeMinutes: 1
     maxQueueSize: -1
-    queueSizeRejectionThreshold: 5
+    queueSizeRejectionThreshold: 10000
     metricsRollingStatisticalWindowInMilliseconds: 10000
     metricsRollingStatisticalWindowBuckets: 10
   circuitBreaker:

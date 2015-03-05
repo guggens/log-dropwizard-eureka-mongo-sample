@@ -9,20 +9,25 @@ public class Log {
 
     @Id
     @JsonProperty
-    private Long id;
+    private String id;
 
     @Length(max = 30)
     @JsonProperty
     private String content;
 
+    @JsonProperty
+    private Long timestamp;
 
     public Log() {
         // Jackson deserialization
     }
 
-    public Log(Long id, String content) {
+    public Log(String id, String content) {
         this.id = id;
         this.content = content;
+        timestamp = System.currentTimeMillis();
     }
+
+
 
 }

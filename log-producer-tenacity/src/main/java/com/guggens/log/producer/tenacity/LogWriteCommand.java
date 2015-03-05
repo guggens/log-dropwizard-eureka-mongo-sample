@@ -1,9 +1,9 @@
 package com.guggens.log.producer.tenacity;
 
 
-import com.netflix.appinfo.InstanceInfo;
-import com.netflix.discovery.DiscoveryManager;
-import com.netflix.discovery.shared.Application;
+import com.netflix.loadbalancer.*;
+import com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList;
+import com.netflix.niws.loadbalancer.DiscoveryEnabledServer;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -25,16 +25,19 @@ public class LogWriteCommand extends TenacityCommand<String> {
 
     @Override
     protected String run() throws Exception {
-        Application telematicLogWriter = DiscoveryManager.getInstance().getDiscoveryClient().getApplication(logWriterApplicationName);
 
-        if (telematicLogWriter == null || telematicLogWriter.getInstances().isEmpty()) {
-            return "broken";
-        }
-
-        InstanceInfo instanceInfo = telematicLogWriter.getInstances().iterator().next();
+        IRule rule = new AvailabilityFilteringRule();
+        ServerList<DiscoveryEnabledServer> list = new DiscoveryEnabledNIWSServerList(logWriterApplicationName);
+        ServerListFilter<DiscoveryEnabledServer> filter = new ZoneAffinityServerListFilter<DiscoveryEnabledServer>();
+        ZoneAwareLoadBalancer<DiscoveryEnabledServer> lb = LoadBalancerBuilder.<DiscoveryEnabledServer>newBuilder()
+                .withDynamicServerList(list)
+                .withRule(rule)
+                .withServerListFilter(filter)
+                .buildDynamicServerListLoadBalancer();
+        Server server = lb.chooseServer();
 
         int number = new Random().nextInt();
-        String url = "http://" + instanceInfo.getIPAddr() + ":" + instanceInfo.getPort() + "/log?name=ProducedLog" + number;
+        String url = "http://" + server.getHostPort() + "/log?name=ProducedLog" + number;
         WebResource webResource = client
                 .resource(url);
 

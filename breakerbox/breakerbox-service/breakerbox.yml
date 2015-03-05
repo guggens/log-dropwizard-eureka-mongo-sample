@@ -1,0 +1,35 @@
+breakerbox:
+  urls: file:config.properties,http://localhost:20040/archaius/breakerbox,http://localhost:20040/archaius/logwriter
+  initialDelay: 0s
+  delay: 60s
+
+database:
+  driverClass: org.h2.Driver
+  url: jdbc:h2:mem:inMemory
+  user: breakerbox
+  password: breakerboxpass
+  maxSize: 10
+  minSize: 2
+  checkConnectionWhileIdle: true
+  validationInterval: 30s
+
+tenacityClient:
+  connectionTimeout: 500ms
+  timeout: 1000ms
+
+defaultDashboard: production
+
+server:
+  applicationConnectors:
+    - type: http
+      port: 20040
+  adminConnectors:
+    - type: http
+      port: 20041
+  gzip:
+    enabled: false
+
+logging:
+  level: INFO
+  appenders:
+    - type: console
